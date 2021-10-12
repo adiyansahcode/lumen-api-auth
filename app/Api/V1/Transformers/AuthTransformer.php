@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Api\V1\Transformers;
 
-use League\Fractal\TransformerAbstract;
 use App\Models\User as DataDb;
 use App\Traits\TransformerTrait;
+use League\Fractal\TransformerAbstract;
 
 class AuthTransformer extends TransformerAbstract
 {
@@ -19,7 +19,7 @@ class AuthTransformer extends TransformerAbstract
     protected $availableIncludes = [];
 
     /**
-     * transform function
+     * transform function.
      *
      * @param DataDb $data
      * @return array

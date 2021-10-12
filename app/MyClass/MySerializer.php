@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\MyClass;
 
-use League\Fractal\Serializer\JsonApiSerializer;
-use League\Fractal\Pagination\PaginatorInterface;
-use League\Fractal\Pagination\CursorInterface;
 use Illuminate\Support\Str;
+use League\Fractal\Pagination\CursorInterface;
+use League\Fractal\Pagination\PaginatorInterface;
+use League\Fractal\Serializer\JsonApiSerializer;
 
 class MySerializer extends JsonApiSerializer
 {
@@ -24,9 +24,9 @@ class MySerializer extends JsonApiSerializer
         $lastPage = (int) $paginator->getLastPage();
 
         $pagination = [
-            'total' => (int)$paginator->getTotal(),
-            'count' => (int)$paginator->getCount(),
-            'perPage' => (int)$paginator->getPerPage(),
+            'total' => (int) $paginator->getTotal(),
+            'count' => (int) $paginator->getCount(),
+            'perPage' => (int) $paginator->getPerPage(),
             'currentPage' => $currentPage,
             'totalPages' => $lastPage,
         ];
@@ -77,7 +77,7 @@ class MySerializer extends JsonApiSerializer
      */
     public function injectAvailableIncludeData($data, $availableIncludes)
     {
-        if (!$this->shouldIncludeLinks()) {
+        if (! $this->shouldIncludeLinks()) {
             return $data;
         }
 
@@ -86,6 +86,7 @@ class MySerializer extends JsonApiSerializer
                 foreach ($availableIncludes as $relationshipKey) {
                     $resource = $this->addRelationshipLinks($resource, $relationshipKey);
                 }
+
                 return $resource;
             }, $data['data']);
         } else {
@@ -105,7 +106,7 @@ class MySerializer extends JsonApiSerializer
      */
     private function addRelationshipLinks($resource, $relationshipKey)
     {
-        if (!isset($resource['relationships']) || !isset($resource['relationships'][$relationshipKey])) {
+        if (! isset($resource['relationships']) || ! isset($resource['relationships'][$relationshipKey])) {
             $resource['relationships'][$relationshipKey] = [];
         }
 
@@ -115,7 +116,7 @@ class MySerializer extends JsonApiSerializer
         $resource['relationships'][$relationshipKey] = array_merge(
             [
                 'links' => [
-                    'self'   => "{$this->baseUrl}/{$type}/{$resource['id']}/relationships/{$relationshipType}",
+                    'self' => "{$this->baseUrl}/{$type}/{$resource['id']}/relationships/{$relationshipType}",
                     'related' => "{$this->baseUrl}/{$type}/{$resource['id']}/{$relationshipType}",
                 ]
             ],

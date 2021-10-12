@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Traits;
 
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
 
 trait Base64ToImageTrait
@@ -22,7 +20,7 @@ trait Base64ToImageTrait
                 'status' => '422',
                 'code' => '422',
                 'title' => 'invalid request',
-                'detail' => "base64 is invalid.",
+                'detail' => 'base64 is invalid.',
                 'source' => [
                     'pointer' => $param
                 ],
@@ -41,7 +39,7 @@ trait Base64ToImageTrait
                     'status' => '422',
                     'code' => '422',
                     'title' => 'invalid request',
-                    'detail' => "base64 is invalid.",
+                    'detail' => 'base64 is invalid.',
                     'source' => [
                         'pointer' => $param
                     ],
@@ -54,8 +52,8 @@ trait Base64ToImageTrait
 
     public function base64ToImage(string $base64, string $fileName, string $param): object
     {
-        $publicUrl = env('APP_URL_PUBLIC') . "images/";
-        $publicPath = env('APP_PATH_PUBLIC') . "images/";
+        $publicUrl = env('APP_URL_PUBLIC') . 'images/';
+        $publicPath = env('APP_PATH_PUBLIC') . 'images/';
         $base64String = $base64;
         $ext = '.png';
 

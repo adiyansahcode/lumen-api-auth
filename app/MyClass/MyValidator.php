@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\MyClass;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 
 class MyValidator extends Validator
@@ -20,7 +20,7 @@ class MyValidator extends Validator
      */
     public function addFailure($attribute, $rule, $parameters = [])
     {
-        if (!$this->messages) {
+        if (! $this->messages) {
             $this->passes();
         }
 

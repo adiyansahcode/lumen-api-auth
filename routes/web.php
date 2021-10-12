@@ -27,10 +27,10 @@ $api->version('v1', function ($api) {
                 ->header('Content-Type', 'application/json');
         });
 
-        /**
+        /*
          * read all file router
          */
-        foreach (glob(realpath(app()->path() . '/Api/V1/Router') . "/*Router.php") as $filename) {
+        foreach (glob(realpath(app()->path() . '/Api/V1/Router') . '/*Router.php') as $filename) {
             include $filename;
         }
     });

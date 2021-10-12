@@ -21,7 +21,7 @@ class JsonValidation
                 'status' => '400',
                 'code' => '400',
                 'title' => 'Bad Request',
-                'detail' => "Content-Type request must application/json",
+                'detail' => 'Content-Type request must application/json',
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 400);
         }
@@ -34,7 +34,7 @@ class JsonValidation
                 'status' => '400',
                 'code' => '400',
                 'title' => 'Bad Request',
-                'detail' => "The request is not a valid JSON.",
+                'detail' => 'The request is not a valid JSON.',
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 400);
         }

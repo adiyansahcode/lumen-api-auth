@@ -7,13 +7,13 @@ namespace App\Api\V1\Controllers;
 use App\Api\V1\Transformers\AuthTransformer as DataTransformer;
 use App\Api\V1\Validations\AuthValidation as DataValidation;
 use App\Models\User as DataDb;
+use App\Traits\Base64ToImageTrait;
 use App\Traits\TransformerTrait;
 use Carbon\Carbon;
 use Dingo\Api\Http\Response as DingoResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Traits\Base64ToImageTrait;
 
 class AuthController extends ApiController
 {
@@ -104,8 +104,8 @@ class AuthController extends ApiController
         ];
 
         return $this->response
-        ->array($responseData)
-        ->withHeader('Allow', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
+            ->array($responseData)
+            ->withHeader('Allow', 'GET,HEAD,OPTIONS,POST,PUT,DELETE');
     }
 
     /**
@@ -328,7 +328,7 @@ class AuthController extends ApiController
             }
 
             if ($this->request->has('data.attributes.image')) {
-                $publicPath = env('APP_PATH_PUBLIC') . "images/";
+                $publicPath = env('APP_PATH_PUBLIC') . 'images/';
                 if ($data->image) {
                     $oldFile = $publicPath . $data->image;
                     if (file_exists($oldFile)) {
@@ -358,8 +358,8 @@ class AuthController extends ApiController
                     'key' => $this->type,
                 ]
             )
-            ->setStatusCode(200)
-            ->withHeader('Allow', 'GET,HEAD,OPTIONS,POST,PUT,PATCH');
+                ->setStatusCode(200)
+                ->withHeader('Allow', 'GET,HEAD,OPTIONS,POST,PUT,PATCH');
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -382,8 +382,8 @@ class AuthController extends ApiController
             $fileMimeType = $file->getClientMimeType();
             $fileName = md5($data->uuid . time()) . '.' . $fileExt;
 
-            $publicUrl = env('APP_URL_PUBLIC') . "images/";
-            $publicPath = env('APP_PATH_PUBLIC') . "images/";
+            $publicUrl = env('APP_URL_PUBLIC') . 'images/';
+            $publicPath = env('APP_PATH_PUBLIC') . 'images/';
             $fileLocationUrl = $publicUrl . $fileName;
             $fileLocationPath = $publicPath . $fileName;
 

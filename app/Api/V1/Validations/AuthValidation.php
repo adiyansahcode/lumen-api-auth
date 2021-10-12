@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Api\V1\Validations;
 
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AuthValidation
 {
@@ -43,7 +43,7 @@ class AuthValidation
                 'status' => '422',
                 'code' => '422',
                 'title' => 'invalid request',
-                'detail' => "uuid resource is not exists.",
+                'detail' => 'uuid resource is not exists.',
                 'source' => ['parameter' => 'uuid'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 422);
@@ -56,7 +56,7 @@ class AuthValidation
                 'status' => '422',
                 'code' => '422',
                 'title' => 'invalid request',
-                'detail' => "time expired",
+                'detail' => 'time expired',
                 'source' => ['parameter' => 'time'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 422);
@@ -144,7 +144,7 @@ class AuthValidation
                 'status' => '400',
                 'code' => '400',
                 'title' => 'invalid request',
-                'detail' => "type resource is invalid.",
+                'detail' => 'type resource is invalid.',
                 'source' => ['pointer' => 'data/type'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 400);
@@ -164,7 +164,7 @@ class AuthValidation
                 'status' => '400',
                 'code' => '400',
                 'title' => 'invalid request',
-                'detail' => "id resource is invalid format.",
+                'detail' => 'id resource is invalid format.',
                 'source' => ['pointer' => 'data/id'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 400);
@@ -181,7 +181,7 @@ class AuthValidation
                 'status' => '400',
                 'code' => '400',
                 'title' => 'invalid request',
-                'detail' => "id resource is not exists.",
+                'detail' => 'id resource is not exists.',
                 'source' => ['pointer' => 'data/id'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 400);
@@ -290,7 +290,7 @@ class AuthValidation
                 'status' => '400',
                 'code' => '400',
                 'title' => 'invalid request',
-                'detail' => "type resource is invalid.",
+                'detail' => 'type resource is invalid.',
                 'source' => ['pointer' => 'data/type'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 400);
@@ -310,7 +310,7 @@ class AuthValidation
                 'status' => '400',
                 'code' => '400',
                 'title' => 'invalid request',
-                'detail' => "id resource is invalid format.",
+                'detail' => 'id resource is invalid format.',
                 'source' => ['pointer' => 'data/id'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 400);
@@ -327,7 +327,7 @@ class AuthValidation
                 'status' => '422',
                 'code' => '422',
                 'title' => 'invalid request',
-                'detail' => "id resource is not exists.",
+                'detail' => 'id resource is not exists.',
                 'source' => ['pointer' => 'data/id'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 422);
@@ -341,7 +341,7 @@ class AuthValidation
                 'status' => '422',
                 'code' => '422',
                 'title' => 'invalid request',
-                'detail' => "id resource is invalid.",
+                'detail' => 'id resource is invalid.',
                 'source' => ['pointer' => 'data/id'],
             ];
             throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 422);
@@ -410,13 +410,13 @@ class AuthValidation
         }
 
         if ($request->has('data.attributes.password')) {
-            if (!Hash::check($request->json('data.attributes.passwordOld'), $dataDb->password)) {
+            if (! Hash::check($request->json('data.attributes.passwordOld'), $dataDb->password)) {
                 $errorMsg['errors'][] = [
                     'id' => (int) mt_rand(1000, 9999),
                     'status' => '422',
                     'code' => '422',
                     'title' => 'invalid request',
-                    'detail' => "Old Password is invalid.",
+                    'detail' => 'Old Password is invalid.',
                     'source' => ['pointer' => 'data/id'],
                 ];
                 throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 422);
