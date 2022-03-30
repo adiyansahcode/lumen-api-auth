@@ -49,6 +49,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        // return parent::render($request, $exception);
+        $errorMsg['errors'][] = [
+            'id' => (int) mt_rand(1000, 9999),
+            'status' => 500,
+            'code' => 500,
+            'title' => 'Internal Server Error',
+            'detail' => $exception->getMessage(),
+        ];
+
+        return response($errorMsg, 401);
     }
 }

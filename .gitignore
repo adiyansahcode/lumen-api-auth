@@ -1,4 +1,6 @@
 /public/storage
+/public/images/*.png
+/public/images/*.jpeg
 /storage/*.key
 /vendor
 /.idea
