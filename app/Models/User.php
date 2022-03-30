@@ -24,23 +24,18 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $table = 'user';
 
     /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'uuid',
-        'fullname',
-        'username',
-        'email',
-        'phone',
-        'date_of_birth',
-        'address',
-        'image',
-        'image_url',
-        'last_login_at',
-        'last_login_ip',
-    ];
+    // protected $fillable = [];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -69,6 +64,42 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var string
      */
     protected $dateFormat = 'Y-m-d H:i:s';
+
+    /**
+     * The default attributes for sorting API.
+     *
+     * @var string
+     */
+    public $defaultSortColumn = 'created_at';
+    public $defaultSortOperator = 'desc';
+
+    /**
+     * The attributes for sorting API.
+     *
+     * @var array
+     */
+    public $sortable = [
+        'created_at',
+        'updated_at',
+        'fullname',
+        'username',
+        'email',
+        'phone',
+    ];
+
+    /**
+     * The attributes for filtering API.
+     *
+     * @var array
+     */
+    public $filterable = [
+        'created_at',
+        'updated_at',
+        'fullname',
+        'username',
+        'email',
+        'phone',
+    ];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

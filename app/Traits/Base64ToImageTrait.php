@@ -57,6 +57,21 @@ trait Base64ToImageTrait
         $base64String = $base64;
         $ext = '.png';
 
+        if (!file_exists($publicPath)) {
+            $errorMsg['errors'][] = [
+                'id' => (int) mt_rand(1000, 9999),
+                'status' => '422',
+                'code' => '422',
+                'title' => 'invalid request',
+                'detail' => 'folder images not exist.',
+                'source' => [
+                    'pointer' => $param
+                ],
+            ];
+
+            throw new \Dingo\Api\Exception\ValidationHttpException($errorMsg, null, [], 422);
+        }
+
         // check base64
         if (Str::contains($base64, 'base64,')) {
             // split the string

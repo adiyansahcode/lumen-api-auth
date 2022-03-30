@@ -7,6 +7,7 @@ namespace App\Providers;
 use App\MyClass\MySerializer;
 use App\MyClass\MyValidator;
 use Dingo\Api\Exception\ValidationHttpException;
+use Error;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -127,9 +128,7 @@ class JSONApiServiceProvider extends ServiceProvider
                 $code = $exception->getCode();
             }
 
-            return response()
-                ->json($exception->getErrors(), $code, ['Content-Type' => 'application/vnd.api+json'])
-                ->header('Content-Type', 'application/vnd.api+json');
+            return response()->json($exception->getErrors(), $code);
         });
 
         // * 500
@@ -142,7 +141,7 @@ class JSONApiServiceProvider extends ServiceProvider
                 'detail' => 'something wrong, ' . $exception->getMessage(),
             ];
 
-            return response($errorMsg, 500)->header('Content-Type', 'application/vnd.api+json');
+            return response($errorMsg, 500);
         });
 
         // * 500
@@ -152,11 +151,23 @@ class JSONApiServiceProvider extends ServiceProvider
                 'status' => '500',
                 'code' => (string) $exception->getCode(),
                 'title' => 'Internal Server Error',
-                // 'detail' => 'something wrong, query invalid',
                 'detail' => 'something wrong, ' . $exception->getMessage(),
             ];
 
-            return response($errorMsg, 500)->header('Content-Type', 'application/vnd.api+json');
+            return response($errorMsg, 500);
+        });
+
+        // * 500
+        app('Dingo\Api\Exception\Handler')->register(function (\Exception $exception) {
+            $errorMsg['errors'][] = [
+                'id' => (int) mt_rand(1000, 9999),
+                'status' => '500',
+                'code' => (string) $exception->getCode(),
+                'title' => 'Internal Server Error',
+                'detail' => 'something wrong, ' . $exception->getMessage(),
+            ];
+
+            return response($errorMsg, 500);
         });
     }
 

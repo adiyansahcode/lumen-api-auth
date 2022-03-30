@@ -8,25 +8,25 @@ use App\Models\User as DataDb;
 use App\Traits\TransformerTrait;
 use League\Fractal\TransformerAbstract;
 
-class AuthTransformer extends TransformerAbstract
+class UserTransformer extends TransformerAbstract
 {
     use TransformerTrait;
 
-    public $type = 'auth';
+    public $type = 'user';
 
-    public $url = 'auth';
+    public $url = 'user';
 
     protected $availableIncludes = [];
 
     /**
-     * transform function.
+     * transform function
      *
-     * @param DataDb $data
+     * @param InboxType $data
      * @return array
      */
     public function transform(DataDb $data): array
     {
-        $linkSelf = $this->getLinkSelf($this->url);
+        $linkSelf = $this->getLinkSelf($this->url, $data->uuid);
 
         return [
             'id' => (string) $data->uuid,
