@@ -21,7 +21,7 @@ Rest API project use [Lumen](https://lumen.laravel.com/) with token base [JWT](h
 username : user
 password: password
 ```
-* Import postman json to your postman `postman.postman_collection.json`
+* Import postman json to your postman `postman.postman_collection.json` & `postman_env.postman_environment`
 * done, just try run your project in postman
 
 ## Included Packages
